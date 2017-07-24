@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
 import Package from '../package'
+import Footer from 'antd'
 
 export default() => (
   <footer>
-    <div className="container">
+    <div>
       <hr/>
       <p>
         <Link prefetch href="/"><a><strong>Home</strong></a></Link>
