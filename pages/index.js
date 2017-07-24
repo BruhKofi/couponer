@@ -20,6 +20,7 @@ export default class extends Page {
             <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
             <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
             <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
+            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
           </Carousel>
           </Col>
           <Col lg={ 6 } md={ 24 }>
