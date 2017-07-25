@@ -17,6 +17,9 @@ module.exports = {
         loader: 'babel-loader!raw-loader!sass-loader'
       }
     )
+    config.node = {
+      fs: 'empty'
+    };  
     return config
   }
 }

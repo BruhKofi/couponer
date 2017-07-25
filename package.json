@@ -14,8 +14,10 @@
         "dotenv": "^4.0.0",
         "express": "^4.14.0",
         "express-session": "^1.14.2",
+        "fs": "^0.0.1-security",
         "isomorphic-fetch": "^2.2.1",
         "lusca": "^1.4.1",
+        "net": "^1.0.2",
         "next": "^2.4.1",
         "next-redux-wrapper": "^1.1.2",
         "node-sass": "^4.5.0",
@@ -35,7 +37,9 @@
         "sass-loader": "^5.0.1",
         "session-file-store": "^1.0.0",
         "sqlite3": "^3.1.8",
-        "uuid": "^3.0.1"
+        "tls": "^0.0.1",
+        "uuid": "^3.0.1",
+        "zanox-api": "^0.1.9"
     },
     "devDependencies": {
         "eslint": "^3.15.0",

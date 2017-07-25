@@ -1,15 +1,60 @@
 /**
  * The index page uses a layout page that pulls in header and footer components
  */
+const Zanox = require("zanox-api");
 import Link from 'next/link'
 import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import ImgCard from '../modules/imgcard.js'
 import { Row, Col, Card, Carousel } from 'antd';
+import SmCard from '../modules/smcard.1.js'
+import "isomorphic-fetch";
+
+const config = require('../config.js')
+const connectId = config.connectId;
+const secretKey = config.secretKey;
+const adspace = config.adspace;
+const zanox = new Zanox(connectId, secretKey);
 
 const urlmain = 'instagram.com';
 export default class extends Page {
+
+  /*  static async getInitialProps() {
+    function zxpromise() {
+      return new Promise(function(resolve, reject) {
+        return zanox.incentives({
+          region: "DE",
+          //items: 5
+        }, function(err, result) {
+          if (err != null) {
+            reject(err);
+          }
+          //console.log(result, "before return");
+          resolve(result);
+        //console.log(result, "after return");
+        });
+      });
+    }
+
+    const res = await zxpromise()
+    //console.log(res, 'rest')
+    //console.log(res.incentiveItems.incentiveItem[0], "json");
+
+    return {
+      items: res.incentiveItems.incentiveItem
+    };
+  }  */
+
+  
+  componentWillMount() {
+    
+  }
+  
+
+
+
+
   render() {
     return (
       <Layout session={ this.props.session }>

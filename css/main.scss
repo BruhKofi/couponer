@@ -1,4 +1,11 @@
 @import '../node_modules/antd/dist/antd.css';
+:global {
+    .ant-card {
+        border-radius: 0;
+        margin-bottom: 240px;
+    }
+}
+
 
 /* $background-color: #fff;
 $text-color: #444;
