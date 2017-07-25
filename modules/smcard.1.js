@@ -2,7 +2,7 @@ import { Card } from 'antd';
 
 const SmCard = (props) => {
   return (
-    <Card loading title={props.title} style={ { width: '100%' } }>
+    <Card loading title={props.title} style={ { width: 'auto' } }>
       Whatever content
     </Card>
     );

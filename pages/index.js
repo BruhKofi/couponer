@@ -46,43 +46,45 @@ export default class extends Page {
       items: res.incentiveItems.incentiveItem
     };
   }  */
-  
 
-  
- /* eslint no-undefined: "error" */
- static async getInitialProps({req}) {
-  // Inherit standard props from the Page (i.e. with session data)
-  let props = await super.getInitialProps({req})
 
-  // If running on server, perform Async call
-  if (typeof window === 'undefined') {
-    props.items = await AsyncData.getData()
+
+  /* eslint no-undefined: "error" */
+  static async getInitialProps({req}) {
+    // Inherit standard props from the Page (i.e. with session data)
+    let props = await super.getInitialProps({
+      req
+    })
+
+    // If running on server, perform Async call
+    if (typeof window === 'undefined') {
+      props.items = await AsyncData.getData()
+    }
+
+    return props
   }
 
-  return props
-}
-
-// Set posts on page load (only if prop is populated, i.e. running on server)
-constructor(props) {
-  super(props)
-  this.state = {
-    items: props.items || []
+  // Set posts on page load (only if prop is populated, i.e. running on server)
+  constructor(props) {
+    super(props)
+    this.state = {
+      items: props.items || []
+    }
   }
-}
 
 
 
 
 
-// This is called after rendering, only on the client (not the server)
-// This allows us to render the page on the client without delaying rendering,
-// then load the data fetched via an async call in when we have it.
-async componentDidMount() {
-  console.log(items, "items");
-  this.setState({
-    items: await AsyncData.getData()
-  })
-}
+  // This is called after rendering, only on the client (not the server)
+  // This allows us to render the page on the client without delaying rendering,
+  // then load the data fetched via an async call in when we have it.
+  async componentDidMount() {
+    console.log(items, "items");
+    this.setState({
+      items: await AsyncData.getData()
+    })
+  }
 
 
 
@@ -90,68 +92,58 @@ async componentDidMount() {
   render() {
     return (
       <Layout session={ this.props.session }>
-
-{
-this.state.items.map((item, i) => (
-  <div key={i}>
-    <strong>{item.name}</strong>
-  </div>
-))
-}
-
         <Row type='flex' gutter={ 24 } align='middle'>
-          <Col lg={ 18 } md={ 24 } sm={ 24 } xs= { 24 }>
-          <Carousel autoplay style={{ width: 'auto', height: 'auto'}}>
-            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
-            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
-            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
-            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
-            <div><img alt="example" src="http://via.placeholder.com/1200x370" /></div>
+          <Col lg={ 18 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Carousel autoplay style={ { width: '100%', height: 'auto' } }>
+            <div><img alt="example" src="http://via.placeholder.com/1200x450" /></div>
+            <div><img alt="example" src="http://via.placeholder.com/1200x450" /></div>
+            <div><img alt="example" src="http://via.placeholder.com/1200x450" /></div>
+            <div><img alt="example" src="http://via.placeholder.com/1200x450" /></div>
+            <div><img alt="example" src="http://via.placeholder.com/1200x450" /></div>
           </Carousel>
+            <br />
           </Col>
-          <Col lg={ 6 } md={ 24 }>
+          <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
           <Row gutter={ 24 } justify="space-around">
-            <Col lg={ 24 } md={ 12 }>
-            <Card loading title="Card title" style={{ width: '100%' }}>
-            Whatever content
-          </Card>
-            </Col>
-            <Col lg={ 24 } md={ 12 }>
-            <Card loading title="Card title" style={{ width: '100%' }}>
-            Whatever content
-          </Card>
-            </Col>
+            { this.state.items.slice(0, 2).map((item, i) => (
+                <Col lg={ 24 } md={ 12 }>
+                <div key={ i }>
+                  <SmCard title={ item.name } />
+                  <br />
+                </div>
+                </Col>
+              )) }
           </Row>
           </Col>
           <Col lg={ 12 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
           <Col lg={ 12 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
           <Col lg={ 24 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card loading title="Card title" style={{ width: '100%' }}>
-          Whatever content
-        </Card>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
           </Col>
         </Row>
       </Layout>
