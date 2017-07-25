@@ -10,6 +10,7 @@ import ImgCard from '../modules/imgcard.js'
 import { Row, Col, Card, Carousel } from 'antd';
 import SmCard from '../modules/smcard.1.js'
 import "isomorphic-fetch";
+import AsyncData from '../components/incentives-data.js'
 
 const config = require('../config.js')
 const connectId = config.connectId;
@@ -45,12 +46,43 @@ export default class extends Page {
       items: res.incentiveItems.incentiveItem
     };
   }  */
+  
 
   
-  componentWillMount() {
-    
+ /* eslint no-undefined: "error" */
+ static async getInitialProps({req}) {
+  // Inherit standard props from the Page (i.e. with session data)
+  let props = await super.getInitialProps({req})
+
+  // If running on server, perform Async call
+  if (typeof window === 'undefined') {
+    props.items = await AsyncData.getData()
   }
-  
+
+  return props
+}
+
+// Set posts on page load (only if prop is populated, i.e. running on server)
+constructor(props) {
+  super(props)
+  this.state = {
+    items: props.items || []
+  }
+}
+
+
+
+
+
+// This is called after rendering, only on the client (not the server)
+// This allows us to render the page on the client without delaying rendering,
+// then load the data fetched via an async call in when we have it.
+async componentDidMount() {
+  console.log(items, "items");
+  this.setState({
+    items: await AsyncData.getData()
+  })
+}
 
 
 
@@ -58,6 +90,15 @@ export default class extends Page {
   render() {
     return (
       <Layout session={ this.props.session }>
+
+{
+this.state.items.map((item, i) => (
+  <div key={i}>
+    <strong>{item.name}</strong>
+  </div>
+))
+}
+
         <Row type='flex' gutter={ 24 } align='middle'>
           <Col lg={ 18 } md={ 24 } sm={ 24 } xs= { 24 }>
           <Carousel autoplay style={{ width: 'auto', height: 'auto'}}>
