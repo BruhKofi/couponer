@@ -24,48 +24,48 @@ export default class extends Page {
           </Carousel>
           </Col>
           <Col lg={ 6 } md={ 24 }>
-          <Row gutter={ 24 }>
+          <Row gutter={ 24 } justify="space-around">
             <Col lg={ 24 } md={ 12 }>
-            <Card bordered={ false } bodyStyle={ { padding: 0, height: 204, background: 'blue', } }>
-              First Top
-            </Card>
+            <Card loading title="Card title" style={{ width: '100%' }}>
+            Whatever content
+          </Card>
             </Col>
             <Col lg={ 24 } md={ 12 }>
-            <Card bordered={ false } bodyStyle={ { padding: 0, height: 204, background: 'blue', } }>
-              First Down
-            </Card>
+            <Card loading title="Card title" style={{ width: '100%' }}>
+            Whatever content
+          </Card>
             </Col>
           </Row>
           </Col>
           <Col lg={ 12 } md={ 24 }>
-          <Card bordered={ false }>
-            Third Left
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
           <Col lg={ 12 } md={ 24 }>
-          <Card bordered={ false }>
-            Third Right
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
           <Col lg={ 24 } md={ 24 }>
-          <Card bordered={ false } bodyStyle={ { padding: '24px 36px 24px 0', height: '500px' } }>
-            Fourth Bar
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card bordered={ false }>
-            Last Left
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card bordered={ false }>
-            Last Middle
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
           <Col lg={ 8 } md={ 24 }>
-          <Card bordered={ false }>
-            Last Right
-          </Card>
+          <Card loading title="Card title" style={{ width: '100%' }}>
+          Whatever content
+        </Card>
           </Col>
         </Row>
       </Layout>
