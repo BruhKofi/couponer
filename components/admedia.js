@@ -22,7 +22,7 @@ export default class {
   static async getData() {
     function zxpromise() {
       return new Promise(function (resolve, reject) {
-        return zanox.incentives({
+        return zanox.admedia({
           region: 'DE'
           // items: 5
         }, function (err, result) {
@@ -37,8 +37,8 @@ export default class {
     }
     // This version of fetch runs in browsers as well as sever side
     let data = await zxpromise()
-    let incentives = data.incentiveItems.incentiveItem
-    return incentives
+    let admedia = data.admediumItems.admediumItems
+    return admedia
   }
 
 }

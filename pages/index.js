@@ -7,47 +7,14 @@ import Link from 'next/link'
 import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
+import { Row, Col, Card, Carousel } from 'antd'
 import ImgCard from '../modules/imgcard.js'
-import {Row, Col, Card, Carousel} from 'antd'
-import SmCard from '../modules/smcard.1.js'
+import SmCard from '../modules/smcard.js'
 import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
+import Slider from '../modules/slider.js'
 
-const config = require('../config.js')
-
-const connectId = config.connectId
-const secretKey = config.secretKey
-const adspace = config.adspace
-const zanox = new Zanox(connectId, secretKey)
-
-const urlmain = 'instagram.com'
 export default class extends Page {
-
-  /*  static async getInitialProps() {
-    function zxpromise() {
-      return new Promise(function(resolve, reject) {
-        return zanox.incentives({
-          region: "DE",
-          //items: 5
-        }, function(err, result) {
-          if (err != null) {
-            reject(err);
-          }
-          //console.log(result, "before return");
-          resolve(result);
-        //console.log(result, "after return");
-        });
-      });
-    }
-
-    const res = await zxpromise()
-    //console.log(res, 'rest')
-    //console.log(res.incentiveItems.incentiveItem[0], "json");
-
-    return {
-      items: res.incentiveItems.incentiveItem
-    };
-  }  */
 
   /* eslint no-undefined: "error" */
   static async getInitialProps({req}) {
@@ -58,7 +25,7 @@ export default class extends Page {
 
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
-      props.items = await AsyncData.getData()
+      props.incentives = await AsyncData.getData()
     }
 
     return props
@@ -68,7 +35,7 @@ export default class extends Page {
   constructor(props) {
     super(props)
     this.state = {
-      items: props.items || []
+      incentives: props.incentives || []
     }
   }
 
@@ -76,68 +43,79 @@ export default class extends Page {
   // This allows us to render the page on the client without delaying rendering,
   // then load the data fetched via an async call in when we have it.
   async componentDidMount() {
-    console.log(items, 'items')
+    console.log(incentives, 'incentives')
     this.setState({
-      items: await AsyncData.getData()
+      incentives: await AsyncData.getData()
     })
   }
 
   render() {
     return (
-      <Layout session={this.props.session}>
-        <Row type="flex" gutter={24} align="middle">
-          <Col lg={18} md={24} sm={24} xs={24}>
-            <Carousel autoplay style={{width: '100%', height: 'auto'}}>
-              <div><img alt="example" src="http://via.placeholder.com/1200x450"/></div>
-              <div><img alt="example" src="http://via.placeholder.com/1200x450"/></div>
-              <div><img alt="example" src="http://via.placeholder.com/1200x450"/></div>
-              <div><img alt="example" src="http://via.placeholder.com/1200x450"/></div>
-              <div><img alt="example" src="http://via.placeholder.com/1200x450"/></div>
-            </Carousel>
-            <br/>
+      <Layout session={ this.props.session }>
+        <Row type="flex" gutter={ 24 } align="middle">
+          <Col lg={ 18 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Slider sliderImage={ "http://via.placeholder.com/1200x450" } />
+          <br/>
           </Col>
-          <Col lg={6} md={24} sm={24} xs={24}>
-            <Row gutter={24} justify="space-around">
-              { this.state.items.slice(0, 2).map((item, i) => (
-                <Col lg={24} md={12}>
-                  <div key={i}>
-                    <SmCard title={item.name}/>
-                    <br/>
-                  </div>
+
+          <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Row gutter={ 24 } justify="space-around">
+            { this.state.incentives.slice(0, 1).map((incentive, i) => (
+                <Col lg={ 24 } md={ 8 } sm={12} xs={24}>
+                <div key={ i }>
+                  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name }/>
+                  <br/>
+                </div>
                 </Col>
               )) }
-            </Row>
+          </Row>
           </Col>
-          <Col lg={12} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
+
+
+
+          
+          { this.state.incentives.slice(0, 8).map((incentive, i) => (
+            <Col lg={ 6 } md={ 12 }>
+            <div key={ i }>
+              <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+              <br/>
+            </div>
+            </Col>
+            )) }
+
+          <Col lg={ 24 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
           </Card>
           </Col>
-          <Col lg={12} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
+          
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
           </Card>
           </Col>
-          <Col lg={24} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
           </Card>
           </Col>
-          <Col lg={8} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
           </Card>
           </Col>
-          <Col lg={8} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
-            Whatever content
-          </Card>
-          </Col>
-          <Col lg={8} md={24}>
-            <Card loading title="Card title" style={{width: '100%'}}>
-            Whatever content
-          </Card>
-          </Col>
+
+          { this.state.incentives.slice(0, 8).map((incentive, i) => (
+<Col lg={ 6 } md={ 12 }>
+<div key={ i }>
+  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+  <br/>
+</div>
+</Col>
+)) }
+
+
+
         </Row>
       </Layout>
     )

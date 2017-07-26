@@ -18,7 +18,7 @@ export default class extends React.Component {
     return (
       <Layout>
         <Header session={this.props.session}/>
-        <Content style={{padding: '50px', background: '#f2f2f2'}}>
+        <Content style={{padding: '10%', background: '#f2f2f2'}}>
           <div style={{background: '#f2f2f2', minHeight: 280}}>
             { this.props.children }
           </div>
