@@ -6,34 +6,34 @@
  * You could also put the logic to detect if code is being run on
  * the server or in the browser inside the page template.
  */
-const Zanox = require("zanox-api");
+const Zanox = require('zanox-api')
+
 import fetch from 'isomorphic-fetch'
 
 const config = require('../config.js')
-const connectId = config.connectId;
-const secretKey = config.secretKey;
-const adspace = config.adspace;
-const zanox = new Zanox(connectId, secretKey);
 
+const connectId = config.connectId
+const secretKey = config.secretKey
+const adspace = config.adspace
+const zanox = new Zanox(connectId, secretKey)
 
 export default class {
 
   static async getData() {
-
     function zxpromise() {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         return zanox.incentives({
-          region: "DE",
-          //items: 5
-        }, function(err, result) {
+          region: 'DE'
+          // items: 5
+        }, function (err, result) {
           if (err != null) {
-            reject(err);
+            reject(err)
           }
-          //console.log(result, "before return");
-          resolve(result);
-        //console.log(result, "after return");
-        });
-      });
+          // console.log(result, "before return");
+          resolve(result)
+        // console.log(result, "after return");
+        })
+      })
     }
     // This version of fetch runs in browsers as well as sever side
     let data = await zxpromise()

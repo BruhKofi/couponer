@@ -1,11 +1,11 @@
-import { Card } from 'antd';
+import {Card} from 'antd'
 
-const SmCard = (props) => {
+const SmCard = props => {
   return (
-    <Card loading title={props.title} style={ { width: 'auto' } }>
+    <Card loading title={props.title} style={{width: 'auto'}}>
       Whatever content
     </Card>
-    );
+  )
 }
 
-export default SmCard;
+export default SmCard

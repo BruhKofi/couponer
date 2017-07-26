@@ -98,15 +98,13 @@ exports.configure = ({
     })
   }
 
-
-  
   // Note: Twitter doesn't expose emails by default so we create a placeholder
   // later if we don't get an email address.
   //
-  // To have your Twitter oAuth return emails go to apps.twitter.com and add 
-  // links to your Terms and Conditions and Privacy Policy under the "Settings" 
-  // tab, then check the "Request email addresses" from users box under the 
-  // "Permissions" tab. 
+  // To have your Twitter oAuth return emails go to apps.twitter.com and add
+  // links to your Terms and Conditions and Privacy Policy under the "Settings"
+  // tab, then check the "Request email addresses" from users box under the
+  // "Permissions" tab.
   if (process.env.TWITTER_KEY && process.env.TWITTER_SECRET) {
     providers.push({
       providerName: 'twitter',
@@ -138,7 +136,7 @@ exports.configure = ({
       try {
         // Normalise the provider specific profile into a User object
         profile = getUserFromProfile(profile)
-        
+
         // If we didn't get an email address from the oAuth provider then
         // generate a unique one as placeholder, using Provider name and ID.
         // If you want users to specify a valid email address after signing in,

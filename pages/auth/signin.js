@@ -152,12 +152,12 @@ export default class extends Page {
         <p>
           To use the oAuth sign in options, you will need to create your own account with each provider and configure each one for your site.
           This can be a slightly cumbersome process that is hard to debug.
-          See <a href="https://github.com/iaincollins/nextjs-starter/blob/master/AUTHENTICATION.md">AUTHENTICATION.md</a> for 
+          See <a href="https://github.com/iaincollins/nextjs-starter/blob/master/AUTHENTICATION.md">AUTHENTICATION.md</a> for
           a step-by-step guide to configuring oAuth and check out <a href="https://github.com/iaincollins/nextjs-starter/blob/master/routes/passport-strategies.js">passport-strategies.js</a> if
           you want to add support for other oAuth providers (e.g. GitHub) using other Passport Strategies.
         </p>
         <p>
-          If you aren&#39;t receiving emails when trying to sign in via email, try configuring the mail server option. 
+          If you aren&#39;t receiving emails when trying to sign in via email, try configuring the mail server option.
         </p>
         <p>
           See <a href="https://github.com/iaincollins/nextjs-starter/blob/master/.env.default">.env.default</a> for all the options you can use in your .env file.

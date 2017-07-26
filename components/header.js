@@ -29,13 +29,13 @@ export default class extends React.Component {
     return (
       <header>
         <Head>
-           <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/2.9.3/antd.min.css"/>
-          {stylesheet} 
-          <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/antd/2.9.3/antd.min.css' />
+          {stylesheet}
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/antd/2.9.3/antd.min.css"/>
         </Head>
         <Menu session={this.props.session}/>
-      {/*   <div className="header">
+        {/*   <div className="header">
           <h1><Link prefetch href="/"><a>Couponer Project</a></Link></h1>
           <hr/>
         </div> */}
