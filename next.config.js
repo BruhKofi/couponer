@@ -1,5 +1,8 @@
 module.exports = {
   webpack: (config, { dev }) => {
+    config.node = {
+      fs: 'empty'
+    }
     config.module.rules.push(
       {
         test: /\.(css|scss)/,
@@ -17,9 +20,6 @@ module.exports = {
         loader: 'babel-loader!raw-loader!sass-loader'
       }
     )
-    config.node = {
-      fs: 'empty'
-    };  
     return config
   }
 }
