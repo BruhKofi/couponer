@@ -57,38 +57,31 @@ export default class extends Page {
           <Slider sliderImage={ "http://via.placeholder.com/1200x450" } />
           <br/>
           </Col>
-
           <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
           <Row gutter={ 24 } justify="space-around">
             { this.state.incentives.slice(0, 1).map((incentive, i) => (
-                <Col lg={ 24 } md={ 8 } sm={12} xs={24}>
+                <Col lg={ 24 } md={ 8 } sm={ 12 } xs={ 24 }>
                 <div key={ i }>
-                  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name }/>
+                  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
                   <br/>
                 </div>
                 </Col>
               )) }
           </Row>
           </Col>
-
-
-
-          
           { this.state.incentives.slice(0, 8).map((incentive, i) => (
-            <Col lg={ 6 } md={ 12 }>
-            <div key={ i }>
-              <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
-              <br/>
-            </div>
-            </Col>
+              <Col lg={ 6 } md={ 12 }>
+              <div key={ i }>
+                <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+                <br/>
+              </div>
+              </Col>
             )) }
-
           <Col lg={ 24 } md={ 24 } sm={ 24 } xs={ 24 }>
           <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
           </Card>
           </Col>
-          
           <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
           <Card loading title="Card title" style={ { width: '100%' } }>
             Whatever content
@@ -104,18 +97,14 @@ export default class extends Page {
             Whatever content
           </Card>
           </Col>
-
           { this.state.incentives.slice(0, 8).map((incentive, i) => (
-<Col lg={ 6 } md={ 12 }>
-<div key={ i }>
-  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
-  <br/>
-</div>
-</Col>
-)) }
-
-
-
+              <Col lg={ 6 } md={ 12 }>
+              <div key={ i }>
+                <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+                <br/>
+              </div>
+              </Col>
+            )) }
         </Row>
       </Layout>
     )
