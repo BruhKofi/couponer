@@ -1,69 +1,112 @@
 /**
  * The index page uses a layout page that pulls in header and footer components
  */
+const Zanox = require('zanox-api')
+
 import Link from 'next/link'
 import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
+import { Row, Col, Card, Carousel } from 'antd'
+import ImgCard from '../modules/imgcard.js'
+import SmCard from '../modules/smcard.js'
+import 'isomorphic-fetch'
+import AsyncData from '../components/incentives-data.js'
+import Slider from '../modules/slider.js'
 
 export default class extends Page {
 
+  /* eslint no-undefined: "error" */
+  static async getInitialProps({req}) {
+    // Inherit standard props from the Page (i.e. with session data)
+    let props = await super.getInitialProps({
+      req
+    })
+
+    // If running on server, perform Async call
+    if (typeof window === 'undefined') {
+      props.incentives = await AsyncData.getData()
+      console.log(props.incentives[0], 'items')
+    }
+
+    return props
+  }
+
+  // Set posts on page load (only if prop is populated, i.e. running on server)
+  constructor(props) {
+    super(props)
+    this.state = {
+      incentives: props.incentives || []
+
+    }
+  }
+
+  // This is called after rendering, only on the client (not the server)
+  // This allows us to render the page on the client without delaying rendering,
+  // then load the data fetched via an async call in when we have it.
+  async componentDidMount() {
+    this.setState({
+      incentives: await AsyncData.getData()
+    })
+  }
+
   render() {
     return (
-      <Layout session={this.props.session}>
-        <h2>About this project</h2>
-        <p>
-          This is a starter <a href="https://zeit.co/blog/next">Next.js 2.0</a> project
-          that shows how to put together a simple website with server and client
-          side rendering powered by Next.js, which uses React.
-        </p>
-        <p>
-          Like all Next.js projects it features automatic pre-fetching of templates
-          with a ServiceWorker, renders pages both client and server side and live
-          reloading in development. It also shows how to use features new in
-          Next.js version 2.0 like integration with Express for custom route handling.
-        </p>
-        <p>
-          There are practical examples with header, footer and layout files,
-          how to add page-specific CSS and JavaScript and header elements,
-          how to write code that does asynchronous data fetching, how to write
-          different logic for fetching data on the client and server if you need
-          to.
-        </p>
-        <p>
-          It includes session support (with CSRF and XSS protection), email
-          based sign-in sytem and integrates with Passport to support signing in
-          with Facebook, Google, Twitter and other sites that support oAuth.
-        </p>
-        <p>
-          All functionality works both client and server side - including
-          without JavaScript support in the browser.
-        </p>
-        <h3>Examples</h3>
-        <ul>
-          <li><Link prefetch href="/helloworld"><a>HelloWorld</a></Link> - The simplest possible example</li>
-          <li><Link prefetch href="/css"><a>CSS &amp; SCSS</a></Link> - Live CSS/SCSS reloading and page specific CSS and &lt;head&gt; tags</li>
-          <li><Link prefetch href="/async"><a>Asynchronous data fetching</a></Link> - How to include data from an API or database</li>
-          <li><Link prefetch href="/routing/?id=example" as="/route/example"><a>Custom routing</a></Link> - Handling custom routes with Express</li>
-          <li><Link prefetch href="/auth/signin"><a>Authentication</a></Link> - Authentication via email and Facebook, Google+ and Twitter</li>
-          <li><Link prefetch href="/clock"><a>Clock</a></Link> - A more advanced example from the Zeit wiki that uses &quot;next-redux-wrapper&quot;</li>
-        </ul>
-        <p>
-          If you want to see how custom 404, 500 and other HTTP errors are handled take a look at pages/_error.js
-        </p>
-        <h3>Configuration</h3>
-        <p>
-          For information on how to build and deploy see <a href="https://github.com/iaincollins/nextjs-starter/blob/master/README.md">README.md</a>
-        </p>
-        <p>
-          For tips on configuring authentication see <a href="https://github.com/iaincollins/nextjs-starter/blob/master/AUTHENTICATION.md">AUTHENTICATION.md</a>
-        </p>
-        <p>
-          Almost all options you might want configure can be set by creating .env file which is read at startup. See <a href="https://github.com/iaincollins/nextjs-starter/blob/master/.env.default">.env.default</a> for an example with all the supported options.
-        </p>
-        <p>
-          You can find the source for this project on GitHub at <Link href="https://github.com/iaincollins/nextjs-starter"><a>https://github.com/iaincollins/nextjs-starter</a></Link>
-        </p>
+      <Layout session={ this.props.session }>
+        <Row type="flex" gutter={ 24 } align="middle">
+          <Col lg={ 18 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Slider sliderImage={ "http://via.placeholder.com/1200x450" } />
+          <br/>
+          </Col>
+          <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Row gutter={ 24 } justify="space-around">
+            { this.state.incentives.slice(0, 1).map((incentive, i) => (
+                <Col lg={ 24 } md={ 8 } sm={ 12 } xs={ 24 }>
+                <div key={ i }>
+                  <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+                  <br/>
+                </div>
+                </Col>
+              )) }
+          </Row>
+          </Col>
+          { this.state.incentives.slice(0, 8).map((incentive, i) => (
+              <Col lg={ 6 } md={ 12 }>
+              <div key={ i }>
+                <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+                <br/>
+              </div>
+              </Col>
+            )) }
+          <Col lg={ 24 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
+          </Col>
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
+          </Col>
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
+          </Col>
+          <Col lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }>
+          <Card loading title="Card title" style={ { width: '100%' } }>
+            Whatever content
+          </Card>
+          </Col>
+          { this.state.incentives.slice(0, 8).map((incentive, i) => (
+              <Col lg={ 6 } md={ 12 }>
+              <div key={ i }>
+                <SmCard title={ incentive.name } extra={ <a href="">mehr</a> } description={ incentive.name } />
+                <br/>
+              </div>
+              </Col>
+            )) }
+        </Row>
       </Layout>
     )
   }

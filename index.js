@@ -15,7 +15,7 @@ if (process.env.LOGS_SECRET) {
   require('now-logs')(process.env.LOGS_SECRET)
 }
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.log('Uncaught Exception: ' + err)
 })
 
@@ -44,7 +44,7 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
   mailserver = smtpTransport({
     host: process.env.EMAIL_SERVER,
     port: process.env.EMAIL_PORT || 25,
-    secure: (process.env.EMAIL_SECURE && process.env.EMAIL_SECURE.match(/true/i)) ? true : false,
+    secure: Boolean(process.env.EMAIL_SECURE && process.env.EMAIL_SECURE.match(/true/i)),
     auth: {
       user: process.env.EMAIL_USERNAME,
       pass: process.env.EMAIL_PASSWORD
@@ -112,7 +112,7 @@ app.prepare()
 
   // Add route to serve compiled SCSS from /assets/{build id}/main.css
   // Note: This is is only used in production, in development it is inlined
-  const sassResult = sass.renderSync({file: './css/main.scss',outputStyle: 'compressed'})
+  const sassResult = sass.renderSync({file: './css/main.scss', outputStyle: 'compressed'})
   server.get('/assets/:id/main.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css')
     res.setHeader('Cache-Control', 'public, max-age=2592000')

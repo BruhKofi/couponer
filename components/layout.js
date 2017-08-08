@@ -1,6 +1,9 @@
 import React from 'react'
 import Header from './header'
 import Footer from './footer'
+import {Layout} from 'antd'
+
+const {Content} = Layout
 
 export default class extends React.Component {
 
@@ -13,13 +16,15 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <Header session={this.props.session}/>
-        <div className="container">
-          { this.props.children }
-        </div>
+        <Content style={{padding: '10%', background: '#f2f2f2'}}>
+          <div style={{background: '#f2f2f2', minHeight: 280}}>
+            { this.props.children }
+          </div>
+        </Content>
         <Footer/>
-      </div>
+      </Layout>
     )
   }
 
