@@ -26,6 +26,7 @@ export default class extends Page {
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
       props.incentives = await AsyncData.getData()
+      console.log(props.incentives[0], 'items')
     }
 
     return props
@@ -36,6 +37,7 @@ export default class extends Page {
     super(props)
     this.state = {
       incentives: props.incentives || []
+
     }
   }
 
@@ -43,7 +45,6 @@ export default class extends Page {
   // This allows us to render the page on the client without delaying rendering,
   // then load the data fetched via an async call in when we have it.
   async componentDidMount() {
-    console.log(incentives, 'incentives')
     this.setState({
       incentives: await AsyncData.getData()
     })
