@@ -10,6 +10,7 @@ import Layout from '../components/layout'
 import { Row, Col, Card, Carousel } from 'antd'
 import ImgCard from '../modules/imgcard.js'
 import SmCard from '../modules/smcard.js'
+import GridCard from '../modules/gridcard.js'
 import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
 import Slider from '../modules/slider.js'
@@ -26,7 +27,7 @@ export default class extends Page {
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
       props.incentives = await AsyncData.getData()
-      console.log(props.incentives[0], 'items')
+      console.log(props.incentives[0].admedia.admediumItem, 'items')
     }
 
     return props
@@ -53,9 +54,12 @@ export default class extends Page {
   render() {
     return (
       <Layout session={ this.props.session }>
+        <GridCard />
+        <GridCard />
+        <br />
         <Row type="flex" gutter={ 24 } align="middle">
           <Col lg={ 18 } md={ 24 } sm={ 24 } xs={ 24 }>
-          <Slider sliderImage={ "http://via.placeholder.com/1200x450" } />
+          <Slider sliderImage={ 'http://via.placeholder.com/1200x450' } />
           <br/>
           </Col>
           <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
@@ -70,6 +74,9 @@ export default class extends Page {
               )) }
           </Row>
           </Col>
+        </Row>
+        <br/>
+        <Row type="flex" gutter={ 24 } align="middle">
           { this.state.incentives.slice(0, 8).map((incentive, i) => (
               <Col lg={ 6 } md={ 12 }>
               <div key={ i }>
