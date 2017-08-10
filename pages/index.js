@@ -27,7 +27,11 @@ export default class extends Page {
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
       props.incentives = await AsyncData.getData()
+<<<<<<< HEAD
       console.log(props.incentives[0].admedia.admediumItem, 'items')
+=======
+      console.log(props.incentives[0], 'items')
+>>>>>>> ee0a7809308dcd856563f028458a687a54ea9f74
     }
 
     return props
@@ -74,9 +78,12 @@ export default class extends Page {
               )) }
           </Row>
           </Col>
+<<<<<<< HEAD
         </Row>
         <br/>
         <Row type="flex" gutter={ 24 } align="middle">
+=======
+>>>>>>> ee0a7809308dcd856563f028458a687a54ea9f74
           { this.state.incentives.slice(0, 8).map((incentive, i) => (
               <Col lg={ 6 } md={ 12 }>
               <div key={ i }>
