@@ -14,6 +14,7 @@ import GridCard from '../modules/gridcard.js'
 import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
 import Slider from '../modules/slider.js'
+import BasicCard from '../modules/basiccard'
 
 export default class extends Page {
 
@@ -27,11 +28,8 @@ export default class extends Page {
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
       props.incentives = await AsyncData.getData()
-<<<<<<< HEAD
-      console.log(props.incentives[0].admedia.admediumItem, 'items')
-=======
-      console.log(props.incentives[0], 'items')
->>>>>>> ee0a7809308dcd856563f028458a687a54ea9f74
+      console.log(props.incentives[50].program["$"].split(" ")[0], 'program name do not delete')
+      console.log(props.incentives[0], 'second')
     }
 
     return props
@@ -58,12 +56,35 @@ export default class extends Page {
   render() {
     return (
       <Layout session={ this.props.session }>
-        <GridCard />
-        <GridCard />
-        <br />
+        <div style={ { background: '#e9e9e9', padding: '0px' } }>
+          <Row gutter={ 30 }>
+            <Col span={ 8 } lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }> Gutscheine
+            { this.state.incentives.slice(0, 5).map((incentive, i) => (
+                <div key={ i }>
+                  <BasicCard title={ incentive.program["$"].split(" ")[0] + ' Gutschein' } description={incentive.admedia.admediumItem.title} />
+                </div>
+              )) }
+            </Col>
+            <Col span={ 8 } lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }> Gutscheine
+            { this.state.incentives.slice(0, 5).map((incentive, i) => (
+                <div key={ i }>
+                <BasicCard title={ incentive.program["$"].split(" ")[0] + ' Gutschein' } description={incentive.admedia.admediumItem.title} />
+                </div>
+              )) }
+            </Col>
+            <Col span={ 8 } lg={ 8 } md={ 24 } sm={ 24 } xs={ 24 }> Gutscheine
+            { this.state.incentives.slice(0, 5).map((incentive, i) => (
+                <div key={ i }>
+                <BasicCard title={ incentive.program["$"].split(" ")[0] + ' Gutschein' } description={incentive.admedia.admediumItem.title} />
+                </div>
+              )) }
+            </Col>
+          </Row>
+        </div>
+        <br/>
         <Row type="flex" gutter={ 24 } align="middle">
           <Col lg={ 18 } md={ 24 } sm={ 24 } xs={ 24 }>
-          <Slider sliderImage={ 'http://via.placeholder.com/1200x450' } />
+          <Slider effect="fade" sliderImage={ 'http://via.placeholder.com/1200x450' } />
           <br/>
           </Col>
           <Col lg={ 6 } md={ 24 } sm={ 24 } xs={ 24 }>
@@ -78,12 +99,6 @@ export default class extends Page {
               )) }
           </Row>
           </Col>
-<<<<<<< HEAD
-        </Row>
-        <br/>
-        <Row type="flex" gutter={ 24 } align="middle">
-=======
->>>>>>> ee0a7809308dcd856563f028458a687a54ea9f74
           { this.state.incentives.slice(0, 8).map((incentive, i) => (
               <Col lg={ 6 } md={ 12 }>
               <div key={ i }>
