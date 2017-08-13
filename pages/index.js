@@ -41,8 +41,14 @@ export default class extends Page {
     super(props)
     this.state = {
       incentives: props.incentives || []
+    };
 
-    }
+    this.storeIncentives(props.incentives);
+  }
+
+  storeIncentives(incentives) {
+    incentives || (incentives = []);
+    process.browser && (window.incentives = incentives);
   }
 
   navigateToIncentivePage(id) {
@@ -53,9 +59,8 @@ export default class extends Page {
   // This allows us to render the page on the client without delaying rendering,
   // then load the data fetched via an async call in when we have it.
   async componentDidMount() {
-    this.setState({
-      incentives: await AsyncData.getData()
-    })
+    const incentives = await AsyncData.getData();
+    this.setState({ incentives });
   }
 
   render() {

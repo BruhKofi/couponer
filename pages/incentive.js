@@ -5,7 +5,13 @@ import incentiveData from '../components/incentives-data';
 export default class Incentive extends Page {
     static async getInitialProps(props) {
         const originalProps = await super.getInitialProps({ req: props.req });
-        const getIncentiveData = await incentiveData.getData();
+        let getIncentiveData;
+        if (!process.browser) {
+            getIncentiveData = await incentiveData.getData();
+        } else {
+            getIncentiveData = window.incentives;
+        }
+
         return {
             ...originalProps,
             incentive: getIncentiveData.find(incentive => incentive['@id'] === props.query.id),
