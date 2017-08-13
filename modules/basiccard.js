@@ -2,7 +2,7 @@ import {Card} from 'antd'
 
 const BasicCard = props => {
   return (
-    <div>
+    <div onClick={props.handleClick(props.id)}>
       <style jsx>
         { `
     #cardOuter {
@@ -21,7 +21,7 @@ const BasicCard = props => {
     max-width: calc(100% - 110px);
     overflow: hidden;
     }
-    
+
   ` }
       </style>
       <Card bordered style={{padding: '5px 5px', width: '100%', zIndex: '20', position: 'relative', height: '100px'}}>

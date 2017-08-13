@@ -15,6 +15,7 @@ import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
 import Slider from '../modules/slider.js'
 import BasicCard from '../modules/basiccard'
+import Router from 'next/router';
 
 export default class extends Page {
 
@@ -44,6 +45,10 @@ export default class extends Page {
     }
   }
 
+  navigateToIncentivePage(id) {
+    Router.push(`/incentive?id=${id}`);
+  }
+
   // This is called after rendering, only on the client (not the server)
   // This allows us to render the page on the client without delaying rendering,
   // then load the data fetched via an async call in when we have it.
@@ -61,21 +66,33 @@ export default class extends Page {
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
