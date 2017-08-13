@@ -6,9 +6,9 @@
  * You could also put the logic to detect if code is being run on
  * the server or in the browser inside the page template.
  */
-const Zanox = require('zanox-api')
-
 import fetch from 'isomorphic-fetch'
+
+const Zanox = require('zanox-api')
 
 const config = require('../config.js')
 
@@ -26,7 +26,7 @@ export default class {
           region: 'DE'
           // items: 5
         }, function (err, result) {
-          if (err != null) {
+          if (err !== null) {
             reject(err)
           }
           // console.log(result, "before return");
