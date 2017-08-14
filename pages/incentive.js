@@ -20,8 +20,7 @@ export default class Incentive extends Page {
 
     render() {
         const { incentive } = this.props;
-
-        return (<div>
+        return (<div session={this.props.session}>
             <h1>Name: {incentive.name}</h1>
         </div>);
     }
