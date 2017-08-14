@@ -15,6 +15,7 @@ import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
 import Slider from '../modules/slider.js'
 import BasicCard from '../modules/basiccard'
+import Router from 'next/router';
 
 export default class extends Page {
 
@@ -39,47 +40,126 @@ export default class extends Page {
   constructor(props) {
     super(props)
     this.state = {
-      incentives: props.incentives || []
+      incentives: props.incentives //|| []
+    };
 
-    }
+    this.storeIncentives(props.incentives);
+  }
+
+  storeIncentives(incentives) {
+    incentives || (incentives = []);
+    process.browser && (window.incentives = incentives);
+  }
+
+  navigateToIncentivePage(id) {
+    Router.push(`/incentive?id=${id}`);
   }
 
   // This is called after rendering, only on the client (not the server)
   // This allows us to render the page on the client without delaying rendering,
   // then load the data fetched via an async call in when we have it.
   async componentDidMount() {
-    this.setState({
-      incentives: await AsyncData.getData()
-    })
+    const incentives = await AsyncData.getData();
+    this.setState({ incentives });
   }
 
   render() {
     return (
       <Layout session={this.props.session}>
         <div style={{background: '#e9e9e9', padding: '0px'}}>
+
+          <Row gutter={30} type="flex">
+          <Col span={18} lg={18} md={18} sm={24} xs={24} style={{height: '100%'}}>
+          <Slider effect="fade" sliderImage={'http://via.placeholder.com/1200x430'}/>
+        </Col>
+        
+        <Col span={6} lg={6} md={6} sm={24} xs={24} style={{height: '100%'}}>
+          <Row gutter={24}>
+          { this.state.incentives.slice(0, 1).map((incentive, i) => (
+            <Col lg={24} md={8} sm={12} xs={24} >
+                <div key={i}>
+                <SmCard title={incentive.name} extra={<a href="">mehr</a>} description={incentive.name}/>
+              </div>
+              </Col>
+            )) }
+        </Row>
+        </Col>
+          </Row>
+
+        
+
+
+
           <Row gutter={30}>
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
             <Col span={8} lg={8} md={24} sm={24} xs={24}> Gutscheine
             { this.state.incentives.slice(0, 5).map((incentive, i) => (
               <div key={i}>
-                  <BasicCard title={incentive.program.$.split(' ')[0] + ' Gutschein'} description={incentive.admedia.admediumItem.title}/>
+                  <BasicCard
+                    title={incentive.program.$.split(' ')[0] + ' Gutschein'}
+                    id={incentive['@id']}
+                    handleClick={(id) => () => this.navigateToIncentivePage(id)}
+                    description={incentive.admedia.admediumItem.title}/>
                 </div>
               )) }
             </Col>
           </Row>
+
+          <Row gutter={30}>
+            <Col span={8} lg={8} md={24} sm={24} xs={24}>
+            { this.state.incentives.slice(0, 1).map((incentive, i) => (
+              <Col lg={24} md={8} sm={12} xs={24}>
+                  <div key={i}>
+                  <SmCard title={incentive.name} extra={<a href="">mehr</a>} description={incentive.name}/>
+                  <br/>
+                </div>
+                </Col>
+              )) }
+            </Col>
+            <Col span={8} lg={8} md={24} sm={24} xs={24}>
+            { this.state.incentives.slice(0, 1).map((incentive, i) => (
+              <Col lg={24} md={8} sm={12} xs={24}>
+                  <div key={i}>
+                  <SmCard title={incentive.name} extra={<a href="">mehr</a>} description={incentive.name}/>
+                  <br/>
+                </div>
+                </Col>
+              )) }
+            </Col>
+            <Col span={8} lg={8} md={24} sm={24} xs={24}>
+            { this.state.incentives.slice(0, 1).map((incentive, i) => (
+              <Col lg={24} md={8} sm={12} xs={24}>
+                  <div key={i}>
+                  <SmCard title={incentive.name} extra={<a href="">mehr</a>} description={incentive.name}/>
+                  <br/>
+                </div>
+                </Col>
+              )) }
+            </Col>
+          </Row>
+
+
         </div>
         <br/>
         <Row type="flex" gutter={24} align="middle">
