@@ -15,7 +15,7 @@ import 'isomorphic-fetch'
 import AsyncData from '../components/incentives-data.js'
 import Slider from '../modules/slider.js'
 import BasicCard from '../modules/basiccard'
-import Router from 'next/router';
+import Router from 'next/router'
 
 export default class extends Page {
 
@@ -29,7 +29,7 @@ export default class extends Page {
     // If running on server, perform Async call
     if (typeof window === 'undefined') {
       props.incentives = await AsyncData.getData()
-      console.log(props.incentives[50].program.$.split(' ')[0], 'program name do not delete')
+      //console.log(props.incentives[50].program.$.split(' ')[0], 'program name do not delete')
       console.log(props.incentives[0], 'second')
     }
 
@@ -40,7 +40,7 @@ export default class extends Page {
   constructor(props) {
     super(props)
     this.state = {
-      incentives: props.incentives //|| []
+      incentives: props.incentives || []
     };
 
     this.storeIncentives(props.incentives);
@@ -52,7 +52,19 @@ export default class extends Page {
   }
 
   navigateToIncentivePage(id) {
-    Router.push(`/incentive?id=${id}`);
+    Router.push({
+      pathname: '/incentive',
+      query: { id: id }
+    })
+   // Router.push(`/incentive?id=${id}`);
+  }
+
+  navigateToProgramPage(id) {
+    Router.push({
+      pathname: '/program',
+      query: { id: id }
+    })
+   // Router.push(`/incentive?id=${id}`);
   }
 
   // This is called after rendering, only on the client (not the server)

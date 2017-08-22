@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../components/page'
-import AsyncData from '../components/incentives-data';
+import incentiveData from '../components/incentives-data';
 
 export default class Incentive extends Page {
     static async getInitialProps(props) {
